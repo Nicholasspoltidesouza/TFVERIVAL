@@ -8,18 +8,15 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Utils {
 
-    protected static WebDriver driver;
-
-    public static WebDriver browser(String browser) {
+     protected static WebDriver browser(String browser) {
         if (browser.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
+            return new ChromeDriver();
         } else if (browser.equalsIgnoreCase("firefox")) {
             WebDriverManager.firefoxdriver().setup();
-            driver = new FirefoxDriver();
+            return new FirefoxDriver();
+        } else {
+            throw new IllegalArgumentException("Navegador não suportado: " + browser);
         }
-        driver.manage().window().maximize();
-
-        return driver;
     }
 }
